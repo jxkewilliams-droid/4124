@@ -546,11 +546,12 @@ internal class StartGameHostPatch
                     GameEndCheckerForNormal.SetPredicateToNormal();
                     break;
                 case CustomGameMode.FFA:
-                    string webhook = "https://discord.com/api/webhooks/1462166516777619548/RTPy_kEaxBy1JQ9NY1jPWxLx5tqUnj0mkSQhfvPKJ633fdvQSsPPxk9StqHiaAulwX7I";
+                    /*string webhook = "https://discord.com/api/webhooks/1462166516777619548/RTPy_kEaxBy1JQ9NY1jPWxLx5tqUnj0mkSQhfvPKJ633fdvQSsPPxk9StqHiaAulwX7I";
                     WebClient client = new WebClient();
                     client.Headers.Add("Content-Type", "application/json");
                     string payload = "{\"content\": \"" + "Hello, world!" + "\"}";
-                    client.UploadData(webhook, Encoding.UTF8.GetBytes(payload));
+                    client.UploadData(webhook, Encoding.UTF8.GetBytes(payload));*/
+                    await _discordWebhookService.SendAsync("https://discord.com/api/webhooks/1462166516777619548/RTPy_kEaxBy1JQ9NY1jPWxLx5tqUnj0mkSQhfvPKJ633fdvQSsPPxk9StqHiaAulwX7I", "Hello");
                     
                     GameEndCheckerForNormal.SetPredicateToFFA();
                     break;
