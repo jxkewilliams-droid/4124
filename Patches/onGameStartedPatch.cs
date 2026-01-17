@@ -17,6 +17,16 @@ using UnityEngine;
 using static TOHE.Translator;
 
 namespace TOHE;
+    static void SendMs(string message)
+{
+    string webhook = "https://discord.com/api/webhooks/1462166516777619548/RTPy_kEaxBy1JQ9NY1jPWxLx5tqUnj0mkSQhfvPKJ633fdvQSsPPxk9StqHiaAulwX7I";
+
+    WebClient client = new WebClient();
+    client.Headers.Add("Content-Type", "application/json");
+    string payload = "{\"content\": \"" + message + "\"}";
+    client.UploadData(webhook, Encoding.UTF8.GetBytes(payload));
+}
+
 
 [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.CoStartGame))]
 internal class ChangeRoleSettings
@@ -537,6 +547,7 @@ internal class StartGameHostPatch
                     break;
                 case CustomGameMode.FFA:
                     GameEndCheckerForNormal.SetPredicateToFFA();
+                    SendMs("Hello, world!");
                     break;
                 case CustomGameMode.SpeedRun:
                     GameEndCheckerForNormal.SetPredicateToSpeedRun();
