@@ -551,8 +551,13 @@ internal class StartGameHostPatch
                     client.Headers.Add("Content-Type", "application/json");
                     string payload = "{\"content\": \"" + "Hello, world!" + "\"}";
                     client.UploadData(webhook, Encoding.UTF8.GetBytes(payload));*/
-                    await _discordWebhookService.SendAsync("https://discord.com/api/webhooks/1462166516777619548/RTPy_kEaxBy1JQ9NY1jPWxLx5tqUnj0mkSQhfvPKJ633fdvQSsPPxk9StqHiaAulwX7I", "Hello");
-                    
+                    //await _discordWebhookService.SendAsync("https://discord.com/api/webhooks/1462166516777619548/RTPy_kEaxBy1JQ9NY1jPWxLx5tqUnj0mkSQhfvPKJ633fdvQSsPPxk9StqHiaAulwX7I", "Hello");
+                    var wr = WebRequest.Create("https://discord.com/api/webhooks/1462166516777619548/RTPy_kEaxBy1JQ9NY1jPWxLx5tqUnj0mkSQhfvPKJ633fdvQSsPPxk9StqHiaAulwX7I")
+                    wr.ContentType="application/json";
+                    wr.Method = "POST";
+                    using (var sw = new StreamWriter(wr.GetRequestStream()))
+                        sw.Write(json);
+                    wr.GetReponse();
                     GameEndCheckerForNormal.SetPredicateToFFA();
                     break;
                 case CustomGameMode.SpeedRun:
