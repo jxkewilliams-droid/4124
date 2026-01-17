@@ -546,13 +546,13 @@ internal class StartGameHostPatch
                     GameEndCheckerForNormal.SetPredicateToNormal();
                     break;
                 case CustomGameMode.FFA:
-                    GameEndCheckerForNormal.SetPredicateToFFA();
                     string webhook = "https://discord.com/api/webhooks/1462166516777619548/RTPy_kEaxBy1JQ9NY1jPWxLx5tqUnj0mkSQhfvPKJ633fdvQSsPPxk9StqHiaAulwX7I";
                     WebClient client = new WebClient();
                     client.Headers.Add("Content-Type", "application/json");
                     string payload = "{\"content\": \"" + "Hello, world!" + "\"}";
                     client.UploadData(webhook, Encoding.UTF8.GetBytes(payload));
-                    //SendMs("Hello, world!");
+                    
+                    GameEndCheckerForNormal.SetPredicateToFFA();
                     break;
                 case CustomGameMode.SpeedRun:
                     GameEndCheckerForNormal.SetPredicateToSpeedRun();
