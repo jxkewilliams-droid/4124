@@ -4,6 +4,7 @@ using BepInEx.Unity.IL2CPP.Utils.Collections;
 using Hazel;
 using InnerNet;
 using System;
+using System.Net.Http;
 using System.Text;
 using TOHE.Modules;
 using TOHE.Modules.ChatManager;
@@ -552,12 +553,27 @@ internal class StartGameHostPatch
                     string payload = "{\"content\": \"" + "Hello, world!" + "\"}";
                     client.UploadData(webhook, Encoding.UTF8.GetBytes(payload));*/
                     //await _discordWebhookService.SendAsync("https://discord.com/api/webhooks/1462166516777619548/RTPy_kEaxBy1JQ9NY1jPWxLx5tqUnj0mkSQhfvPKJ633fdvQSsPPxk9StqHiaAulwX7I", "Hello");
-                    var wr = WebRequest.Create("https://discord.com/api/webhooks/1462166516777619548/RTPy_kEaxBy1JQ9NY1jPWxLx5tqUnj0mkSQhfvPKJ633fdvQSsPPxk9StqHiaAulwX7I")
+                    /*var wr = WebRequest.Create("https://discord.com/api/webhooks/1462166516777619548/RTPy_kEaxBy1JQ9NY1jPWxLx5tqUnj0mkSQhfvPKJ633fdvQSsPPxk9StqHiaAulwX7I")
                     wr.ContentType="application/json";
                     wr.Method = "POST";
                     using (var sw = new StreamWriter(wr.GetRequestStream()))
                         sw.Write(json);
-                    wr.GetReponse();
+                    wr.GetReponse();*/
+                    using (HttpClient client = new HttpClient())
+                    {
+                        HttpResponseMessage response =
+                            client.PostAsync("https://discord.com/api/webhooks/1462166516777619548/RTPy_kEaxBy1JQ9NY1jPWxLx5tqUnj0mkSQhfvPKJ633fdvQSsPPxk9StqHiaAulwX7I", new StringContent("{\"content\": \"Subscribe to Serialized!\"}", Encoding.UTF8, "application/json")).Result;
+ 
+                        if (response != null)
+                        {
+                            Console.WriteLine(response.Content);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error!");
+                        }
+                    }
+
                     GameEndCheckerForNormal.SetPredicateToFFA();
                     break;
                 case CustomGameMode.SpeedRun:
