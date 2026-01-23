@@ -24,7 +24,7 @@ public class MainMenuManagerStartPatch
 
         ToheLogo = logoObject.AddComponent<SpriteRenderer>();
         logoTransform.parent = rightpanel;
-        logoTransform.localPosition = new(-0.16f, 0f, 1f);
+        logoTransform.localPosition = new(-0.5f, 0f, 2f);
         logoTransform.localScale *= 1.2f;
 
         if ((Ambience = GameObject.Find("Ambience")) != null)
